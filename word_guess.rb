@@ -1,7 +1,7 @@
 require 'csv'
 
 class WordGuess
-  def initialize(debug = true)
+  def initialize(debug = false)
     # are we in debug mode?
     @debug = debug
 
@@ -79,8 +79,8 @@ class WordGuess
 
   def load_word_data()
     CSV.open("words.csv", 'r').each do |line|
-      @line.each do |word|
-        @words << word
+      line.each do |key, value|
+        @words[line[0]] = line[1..line.length]
       end
     end
   end
