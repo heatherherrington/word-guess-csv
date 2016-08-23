@@ -80,7 +80,7 @@ class WordGuess
   def load_word_data()
     CSV.open("words.csv", 'r').each do |line|
       line.each do |key, value|
-        @words[line[0]] = line[1..line.length]
+        @words[line[0]] = line[1..-1]
       end
     end
   end
