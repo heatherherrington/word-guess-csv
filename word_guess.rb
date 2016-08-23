@@ -78,6 +78,11 @@ class WordGuess
   private
 
   def load_word_data()
+    # Kari's approach
+    # CSV.read("words.csv").each do |line|
+    #   @words[line[0]] = line[1..-1]
+    # end
+
     CSV.open("words.csv", 'r').each do |line|
       line.each do |key, value|
         @words[line[0]] = line[1..-1]
