@@ -1,16 +1,18 @@
+require 'csv'
+
 class WordGuess
-  def initialize(debug = false)
+  def initialize(debug = true)
     # are we in debug mode?
     @debug = debug
 
     # possible words, selected at random
     @words = {
-      "e" => %w(dog cat bug hat cap lit kin fan fin fun tan ten tin ton),
-      "m" => %w(plain claim brine crime alive bride skine drive slime stein jumpy),
-      "h" => %w(
-          machiavellian prestidigitation plenipotentiary quattuordecillion
-          magnanimous unencumbered bioluminescent circumlocution
-        )
+      # "e" => %w(dog cat bug hat cap lit kin fan fin fun tan ten tin ton),
+      # "m" => %w(plain claim brine crime alive bride skine drive slime stein jumpy),
+      # "h" => %w(
+      #     machiavellian prestidigitation plenipotentiary quattuordecillion
+      #     magnanimous unencumbered bioluminescent circumlocution
+      #   )
     }
 
     # players attempts allowed by difficulty
@@ -19,6 +21,9 @@ class WordGuess
       "m" => 6,
       "h" => 4
     }
+
+    # Populate the word hash
+    load_word_data()
 
     # ask the user to set the game mode
     mode = set_mode
@@ -71,6 +76,14 @@ class WordGuess
   end
 
   private
+
+  def load_word_data()
+    CSV.open("words.csv", 'r').each do |line|
+      @line.each do |word|
+        @words << word
+      end
+    end
+  end
 
   def add_to_guessed(letter)
     # push the letter to the array, then get rid of duplicates.
